@@ -8,7 +8,6 @@
 
 struct channel {
 	pthread_mutex_t send_mtx, receive_mtx;
-	bool sender_here, receiver_here;
 	void *buffer;
 	size_t size;
 };
@@ -17,8 +16,7 @@ struct channel *newChannel(size_t size) {
 	struct channel *c = malloc(sizeof(*c));
 	pthread_mutex_init(&(c->send_mtx), NULL);
 	pthread_mutex_init(&(c->receive_mtx), NULL);
-
-	c->sender_here = c->receiver_here = false;
+	
 	c->buffer = NULL;
 	c->size = size;
 
